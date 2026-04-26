@@ -1,0 +1,102 @@
+package com.example.mid1;
+
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
+
+public class loginFragment extends Fragment {
+
+    Button btn_login;
+    TextInputEditText tiet_username, tiet_password;
+    SharedPreferences sPref;
+    SharedPreferences.Editor editor;
+
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    private String mParam1;
+    private String mParam2;
+
+    public loginFragment() {
+        // Required empty public constructor
+    }
+
+    public static loginFragment newInstance(String param1, String param2) {
+        loginFragment fragment = new loginFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_login, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        btn_login = view.findViewById(R.id.btn_login);
+        tiet_username = view.findViewById(R.id.tiet_username);
+        tiet_password = view.findViewById(R.id.tiet_password);
+        sPref = getActivity().getSharedPreferences("user", MODE_PRIVATE);
+        editor = sPref.edit();
+
+        btn_login.setOnClickListener((v) -> {
+            login();
+        });
+
+        view.setOnTouchListener((v, event) -> {
+            hideSoftKeyboard(view);
+            return false;
+        });
+    }
+
+    void login() {
+        if (tiet_username.getText().toString().trim().isEmpty() || tiet_password.getText().toString().trim().isEmpty()) {
+            Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
+        } else if (sPref.getString("user.username", "").equals(tiet_username.getText().toString().trim())
+                && sPref.getString("user.password", "").equals(tiet_password.getText().toString().trim())) {
+            editor.putBoolean("user.isLogin", true);
+            editor.commit();
+            startActivity(new Intent(requireContext(), MainActivity2.class));
+            getActivity().finish();
+        } else {
+            Toast.makeText(requireContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void hideSoftKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getActivity()
+                .getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+}

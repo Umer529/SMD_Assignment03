@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    tools:context=".single_deal_item_design">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        android:backgroundTint="@color/confirm_bg"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        <ImageView
+            android:id="@+id/iv_dealimg"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:padding="20dp"
+            android:src="@drawable/rod_podmic"
+            android:scaleType="centerInside"
+            android:layout_marginEnd="12dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:paddingEnd="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Microphones"
+            android:textSize="13sp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_dealprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$108.20"
+            android:textColor="@color/price_bright_red"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tv_dealname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RØDE PodMic"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tv_dealdesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dynamic microphone, Speaker microphone"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:layout_marginTop="2dp"
+            android:maxLines="2"
+            android:ellipsize="end" />
+        </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</LinearLayout>
