@@ -4,103 +4,148 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
     android:background="@color/white">
 
-    <TextView
-        android:id="@+id/tv_seller_welcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Welcome to Your Seller Dashboard"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/text_primary"
-        android:layout_marginBottom="24dp" />
-
-    <!-- Stats Section -->
+    <!-- Header and Stats Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="24dp">
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="@color/white">
 
+        <TextView
+            android:id="@+id/tv_seller_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Products"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Stats Section -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:background="@color/card_bg"
-            android:padding="16dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Orders"
-                android:textSize="12sp"
-                android:textColor="@color/text_secondary" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@color/card_bg"
+                android:padding="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:layout_marginTop="8dp" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Products"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:background="@color/card_bg"
-            android:padding="16dp"
-            android:layout_marginStart="8dp"
-            android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_total_products"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Revenue"
-                android:textSize="12sp"
-                android:textColor="@color/text_secondary" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@color/card_bg"
+                android:padding="16dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$0.00"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:layout_marginTop="8dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Stock"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/tv_total_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Quick Actions -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_add_product"
+    <!-- Empty State Message -->
+    <LinearLayout
+        android:id="@+id/ll_empty_state"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add New Product"
-        android:textSize="16sp"
-        app:backgroundTint="@color/black"
-        android:textColor="@color/white"
-        app:cornerRadius="12dp"
-        android:layout_marginBottom="12dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_view_products"
-        android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No products yet"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_secondary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add your first product to get started!"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <!-- Loading Indicator -->
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View My Products"
-        android:textSize="16sp"
-        app:backgroundTint="@color/black"
-        android:textColor="@color/white"
-        app:cornerRadius="12dp" />
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Products RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_products"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp" />
+
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:contentDescription="Add product"
+        app:srcCompat="@drawable/ic_menu"
+        app:backgroundTint="@color/black" />
 
 </LinearLayout>
+
 
 

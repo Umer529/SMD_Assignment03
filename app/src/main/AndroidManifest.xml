@@ -23,6 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mid1">
         <activity
+            android:name=".ProductDescriptionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".SellerDashboard"
             android:exported="false" />
         <activity
