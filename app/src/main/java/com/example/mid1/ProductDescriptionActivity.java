@@ -18,9 +18,6 @@ import com.google.android.material.button.MaterialButton;
 
 import androidx.lifecycle.ViewModelProvider;
 
-/**
- * Activity for displaying product details
- */
 public class ProductDescriptionActivity extends AppCompatActivity {
 
     private ImageView ivProductImage;
@@ -139,6 +136,7 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         }
     }
 }
+
 
 
 

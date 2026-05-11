@@ -1,8 +1,5 @@
 package com.example.mid1;
 
-/**
- * Product model class representing a seller's product
- */
 public class Product {
     private String id;
     private String name;
@@ -14,11 +11,9 @@ public class Product {
     private long createdAt;
     private String sellerId;
 
-    // Default constructor (required for Firebase)
     public Product() {
     }
 
-    // Constructor with parameters
     public Product(String name, String description, String category, double price, int stock, String imageUrl) {
         this.name = name;
         this.description = description;
@@ -29,7 +24,6 @@ public class Product {
         this.createdAt = System.currentTimeMillis();
     }
 
-    // Getters and Setters
     public String getId() {
         return id;
     }
@@ -102,4 +96,6 @@ public class Product {
         this.sellerId = sellerId;
     }
 }
+
+
 

@@ -12,9 +12,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Repository for handling product-related Firebase operations
- */
 public class ProductRepository {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
@@ -44,9 +41,6 @@ public class ProductRepository {
         return loadingLiveData;
     }
 
-    /**
-     * Load all products for the current seller
-     */
     public void loadSellerProducts() {
         loadingLiveData.setValue(true);
         String sellerId = firebaseAuth.getCurrentUser().getUid();
@@ -77,9 +71,6 @@ public class ProductRepository {
                 });
     }
 
-    /**
-     * Add a new product to Firebase
-     */
     public void addProduct(Product product, OnProductAddedListener listener) {
         loadingLiveData.setValue(true);
         String sellerId = firebaseAuth.getCurrentUser().getUid();
@@ -104,9 +95,6 @@ public class ProductRepository {
         }
     }
 
-    /**
-     * Update an existing product
-     */
     public void updateProduct(String productId, Product product, OnProductUpdatedListener listener) {
         loadingLiveData.setValue(true);
         product.setId(productId);
@@ -127,9 +115,6 @@ public class ProductRepository {
                 });
     }
 
-    /**
-     * Delete a product
-     */
     public void deleteProduct(String productId, OnProductDeletedListener listener) {
         loadingLiveData.setValue(true);
 
@@ -149,9 +134,6 @@ public class ProductRepository {
                 });
     }
 
-    /**
-     * Get a single product by ID
-     */
     public void getProductById(String productId, MutableLiveData<Product> productLiveData) {
         loadingLiveData.setValue(true);
 
@@ -173,8 +155,7 @@ public class ProductRepository {
             }
         });
     }
-
-    // Listener interfaces
+    
     public interface OnProductAddedListener {
         void onSuccess(String productId);
         void onFailure(String error);
@@ -190,4 +171,11 @@ public class ProductRepository {
         void onFailure(String error);
     }
 }
+
+
+
+
+
+
+
 

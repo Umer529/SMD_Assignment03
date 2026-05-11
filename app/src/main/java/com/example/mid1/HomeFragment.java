@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.google.android.material.button.MaterialButton;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
@@ -19,13 +26,17 @@ public class HomeFragment extends Fragment {
 
     ItemAdapter adapter ;
     DealItemAdapter dealAdapter;
-
+    BuyerProductViewModel viewModel;
+    
+    LinearLayout llLoading, llEmpty, llError;
+    TextView tvErrorMessage;
+    MaterialButton btnRetry;
+    View svContent;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -34,56 +45,96 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvItems = view.findViewById(R.id.rvItems);
         rvDealItems = view.findViewById(R.id.rvDealItems);
+        
+        llLoading = view.findViewById(R.id.ll_loading);
+        llEmpty = view.findViewById(R.id.ll_empty);
+        llError = view.findViewById(R.id.ll_error);
+        tvErrorMessage = view.findViewById(R.id.tv_error_message);
+        btnRetry = view.findViewById(R.id.btn_retry);
+        svContent = view.findViewById(R.id.sv_content);
 
-        // Only populate items list once to avoid duplicates when re-navigating
-        if (MyApplication.items.isEmpty()) {
-            MyApplication.deal_items.add(new items("Sony Premium Wireless Headphones", "$349.99", R.drawable.sony_premium_1, "Model: WH-1000M4, Black", getString(R.string.desc_cards), false));
-            MyApplication.deal_items.add(new items("Sony Premium Wireless Headphones", "$349.99", R.drawable.sony_premium_2, "Model: WH-1000M4, Beige", getString(R.string.desc_cards), false));
-            MyApplication.deal_items.add(new items("RODE PodMic", "$108.20", R.drawable.rod_podmic, "Dynamic microphone, Speaker microphone", getString(R.string.desc_deal), false));
-            MyApplication.items.add(new items("Sony Premium Wireless Headphones", "$349.99", R.drawable.sony_premium_1, "Model: WH-1000M4, Black", getString(R.string.desc_cards), false));
-            MyApplication.items.add(new items("Sony Premium Wireless Headphones", "$349.99", R.drawable.sony_premium_2, "Model: WH-1000M4, Beige", getString(R.string.desc_cards), false));
-            MyApplication.items.add(new items("RODE PodMic", "$108.20", R.drawable.rod_podmic, "Dynamic microphone, Speaker microphone", getString(R.string.desc_deal), false));
-            MyApplication.items.add(new items("Apple AirPods Pro (2nd Gen)", "$249.00", R.drawable.sony_premium_1, "Model: A2968, Active Noise Cancellation", getString(R.string.desc_cards), false));
-            MyApplication.items.add(new items("Samsung Galaxy Buds2 Pro", "$199.99", R.drawable.sony_premium_1, "Model: SM-R510, Graphite", getString(R.string.desc_cards), false));
-            MyApplication.items.add(new items("Bose QuietComfort 45", "$329.00", R.drawable.sony_premium_1, "Wireless Noise Cancelling Headphones", getString(R.string.desc_cards), false));
-            MyApplication.items.add(new items("Logitech MX Master 3S Mouse", "$99.99", R.drawable.sony_premium_1, "Wireless Precision Mouse, 8000 DPI", getString(R.string.desc_cards), false));
-            MyApplication.items.add(new items("Razer BlackWidow V3 Keyboard", "$129.99", R.drawable.sony_premium_1, "Mechanical Gaming Keyboard, Green Switches", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("Dell UltraSharp 27 Monitor", "$399.99", R.drawable.sony_premium_1, "27-inch 4K IPS Display", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("HP Envy 13 Laptop", "$899.00", R.drawable.sony_premium_1, "Intel i7, 16GB RAM, 512GB SSD", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("Apple iPad Air (5th Gen)", "$599.00", R.drawable.sony_premium_1, "M1 Chip, 10.9-inch Display", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("Amazon Echo Dot (5th Gen)", "$49.99", R.drawable.sony_premium_1, "Smart Speaker with Alexa", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("Google Nest Hub (2nd Gen)", "$99.99", R.drawable.sony_premium_1, "Smart Display with Assistant", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("Canon EOS 1500D DSLR", "$549.00", R.drawable.sony_premium_1, "24.1MP Camera with Kit Lens", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("Sony PlayStation 5", "$499.99", R.drawable.sony_premium_1, "Next-Gen Gaming Console", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("Xbox Series X", "$499.99", R.drawable.sony_premium_1, "1TB SSD, 4K Gaming Console", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("Anker PowerCore 20000", "$59.99", R.drawable.sony_premium_1, "High Capacity Power Bank", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("JBL Flip 6 Speaker", "$129.95", R.drawable.sony_premium_1, "Portable Waterproof Speaker", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("Fitbit Charge 6", "$159.95", R.drawable.sony_premium_1, "Fitness Tracker with Heart Rate Monitor", getString(R.string.desc_cards), false));
-
-            MyApplication.items.add(new items("GoPro Hero 11 Black", "$399.99", R.drawable.sony_premium_1, "4K Action Camera", getString(R.string.desc_cards), false));
-        }
-
-        adapter = new ItemAdapter(requireContext(), MyApplication.items);
-        dealAdapter = new DealItemAdapter(requireContext(),MyApplication.deal_items);
+        adapter = new ItemAdapter(requireContext(), new ArrayList<>());
+        dealAdapter = new DealItemAdapter(requireContext(), new ArrayList<>());
+        
         rvItems.setLayoutManager(new GridLayoutManager(requireContext(),2));
         rvItems.setAdapter(adapter);
         rvItems.setNestedScrollingEnabled(false);
+        
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 1, GridLayoutManager.HORIZONTAL, false);
         rvDealItems.setLayoutManager(gridLayoutManager);
         rvDealItems.setAdapter(dealAdapter);
         rvDealItems.setNestedScrollingEnabled(false);
 
+        viewModel = new ViewModelProvider(this).get(BuyerProductViewModel.class);
+        
+        setupObservers();
+        setupRetryButton();
+        
+        viewModel.attachListener();
+    }
 
+    private void setupObservers() {
+        viewModel.getProducts().observe(getViewLifecycleOwner(), products -> {
+            if (products != null) {
+                ArrayList<items> itemsList = new ArrayList<>(products);
+                adapter.updateItems(itemsList);
+                
+                if (MyApplication.items.isEmpty()) {
+                    MyApplication.items.addAll(itemsList);
+                } else {
+                    MyApplication.items.clear();
+                    MyApplication.items.addAll(itemsList);
+                }
+            }
+        });
+
+        viewModel.getLoadingState().observe(getViewLifecycleOwner(), state -> {
+            if (state != null) {
+                updateLoadingState(state);
+            }
+        });
+
+        viewModel.getError().observe(getViewLifecycleOwner(), error -> {
+            if (error != null && !error.isEmpty()) {
+                tvErrorMessage.setText(error);
+            }
+        });
+    }
+
+    private void setupRetryButton() {
+        btnRetry.setOnClickListener(v -> {
+            viewModel.detachListener();
+            viewModel.attachListener();
+        });
+    }
+
+    private void updateLoadingState(int state) {
+        llLoading.setVisibility(View.GONE);
+        llEmpty.setVisibility(View.GONE);
+        llError.setVisibility(View.GONE);
+        svContent.setVisibility(View.GONE);
+
+        switch (state) {
+            case BuyerProductRepository.LOADING_STATE_LOADING:
+                llLoading.setVisibility(View.VISIBLE);
+                break;
+            case BuyerProductRepository.LOADING_STATE_SUCCESS:
+                svContent.setVisibility(View.VISIBLE);
+                break;
+            case BuyerProductRepository.LOADING_STATE_EMPTY:
+                llEmpty.setVisibility(View.VISIBLE);
+                break;
+            case BuyerProductRepository.LOADING_STATE_ERROR:
+                llError.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (viewModel != null) {
+            viewModel.detachListener();
+        }
     }
 }

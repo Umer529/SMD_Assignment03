@@ -15,9 +15,6 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * RecyclerView adapter for displaying seller's products
- */
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private Context context;
     private List<Product> products;
@@ -131,4 +128,5 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         void onProductDelete(Product product);
     }
 }
+
 

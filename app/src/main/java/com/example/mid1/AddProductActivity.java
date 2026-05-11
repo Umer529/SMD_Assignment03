@@ -19,9 +19,6 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import androidx.lifecycle.ViewModelProvider;
 
-/**
- * Activity for adding/editing products
- */
 public class AddProductActivity extends AppCompatActivity {
 
     private TextInputEditText etProductName;
@@ -254,6 +251,7 @@ public class AddProductActivity extends AppCompatActivity {
         tvError.setVisibility(View.VISIBLE);
     }
 }
+
 
 
 

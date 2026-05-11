@@ -1,19 +1,14 @@
-Implement seller product management system using Firebase Realtime Database.
+Implement real-time product synchronization for Buyer Home screen using Firebase Realtime Database listeners.
 
 Requirements:
-1. FloatingActionButton on Seller Home.
-2. Clicking FAB opens Add Product screen.
-3. Product fields:
-    - name
-    - description
-    - category
-    - price
-    - stock
-    - image url
-4. Store products in Firebase Realtime Database.
-5. Display all seller products in RecyclerView.
-6. Clicking product opens Product Description page.
-7. Use Glide for image loading.
-8. Add product validation.
-9. Add loading indicators and empty states.
-10. Use Repository + ViewModel pattern.
+1. Fetch all products dynamically.
+2. Use ValueEventListener for live updates.
+3. Newly added products should instantly appear.
+4. Modified products should instantly update.
+5. Deleted products should instantly disappear.
+6. No app restart required.
+7. Implement proper Firebase listeners lifecycle handling.
+8. Prevent duplicate RecyclerView entries.
+9. Add loading state, retry state, and empty state UI.
+10. Use DiffUtil for RecyclerView optimization.
+11. Follow MVVM architecture.

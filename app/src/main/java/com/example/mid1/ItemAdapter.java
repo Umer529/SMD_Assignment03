@@ -8,18 +8,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
+public class ItemAdapter extends ListAdapter<items, ItemAdapter.ItemViewHolder> {
     Context context;
     ArrayList<items> items;
 
     public ItemAdapter(Context context, ArrayList<items> items) {
+        super(new ItemDiffCallback());
         this.context = context;
         this.items = items;
-
     }
 
     @NonNull
@@ -31,7 +33,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        items item = items.get(position);
+        items item = getItem(position);
         holder.iv_fav.setImageResource(item.getImage());
         holder.tv_name.setText(item.getName());
         holder.tv_price.setText(item.getPrice());
@@ -48,7 +50,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             item.setFav(!item.isFav());
             notifyItemChanged(position);
 
-            // Update SavedFragment's list and adapter
             if (MyApplication.favItemAdapter != null && MyApplication.favList != null) {
                 MyApplication.favList.clear();
                 for (items it : items) {
@@ -60,7 +61,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             }
         });
 
-        // Open product detail page on card click
         holder.iv_img.setOnClickListener((v) -> {
             Intent intent = new Intent(context, detail_card.class);
             intent.putExtra("image", item.getImage());
@@ -72,9 +72,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         });
     }
 
-    @Override
-    public int getItemCount() {
-        return items.size();
+    public void updateItems(ArrayList<items> newItems) {
+        this.items = newItems;
+        submitList(new ArrayList<>(newItems));
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -87,6 +87,22 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             tv_name = itemView.findViewById(R.id.tv_name);
             tv_price = itemView.findViewById(R.id.tv_price);
             tv_desc = itemView.findViewById(R.id.tv_desc);
+        }
+    }
+
+    private static class ItemDiffCallback extends DiffUtil.ItemCallback<items> {
+        @Override
+        public boolean areItemsTheSame(@NonNull items oldItem, @NonNull items newItem) {
+            return oldItem.getName().equals(newItem.getName()) && 
+                   oldItem.getPrice().equals(newItem.getPrice());
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull items oldItem, @NonNull items newItem) {
+            return oldItem.getName().equals(newItem.getName()) &&
+                   oldItem.getPrice().equals(newItem.getPrice()) &&
+                   oldItem.getDescription().equals(newItem.getDescription()) &&
+                   oldItem.isFav() == newItem.isFav();
         }
     }
 }

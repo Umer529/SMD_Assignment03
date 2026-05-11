@@ -6,9 +6,6 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-/**
- * ViewModel for managing product-related data and operations
- */
 public class ProductViewModel extends ViewModel {
     private ProductRepository productRepository;
     private LiveData<List<Product>> productsLiveData;
@@ -40,40 +37,31 @@ public class ProductViewModel extends ViewModel {
         return currentProductLiveData;
     }
 
-    /**
-     * Load all products for the current seller
-     */
     public void loadSellerProducts() {
         productRepository.loadSellerProducts();
     }
 
-    /**
-     * Add a new product
-     */
     public void addProduct(Product product, ProductRepository.OnProductAddedListener listener) {
         productRepository.addProduct(product, listener);
     }
 
-    /**
-     * Update an existing product
-     */
     public void updateProduct(String productId, Product product, 
                              ProductRepository.OnProductUpdatedListener listener) {
         productRepository.updateProduct(productId, product, listener);
     }
 
-    /**
-     * Delete a product
-     */
     public void deleteProduct(String productId, ProductRepository.OnProductDeletedListener listener) {
         productRepository.deleteProduct(productId, listener);
     }
 
-    /**
-     * Get a product by ID
-     */
     public void getProductById(String productId) {
         productRepository.getProductById(productId, currentProductLiveData);
     }
 }
+
+
+
+
+
+
 

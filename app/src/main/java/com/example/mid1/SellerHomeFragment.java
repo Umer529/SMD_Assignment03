@@ -21,10 +21,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-/**
- * Seller Home Fragment
- * Displays seller home dashboard with products list
- */
 public class SellerHomeFragment extends Fragment {
 
     private RecyclerView rvProducts;
@@ -196,6 +192,7 @@ public class SellerHomeFragment extends Fragment {
                 .show();
     }
 }
+
 
 
 

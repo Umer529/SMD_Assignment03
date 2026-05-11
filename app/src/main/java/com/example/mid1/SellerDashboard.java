@@ -19,10 +19,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
-/**
- * Seller Dashboard Activity
- * Main activity for sellers with drawer navigation and theme support
- */
 public class SellerDashboard extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -34,7 +30,6 @@ public class SellerDashboard extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Initialize theme manager before setContentView
         themeManager = ThemeManager.getInstance(this);
         
         super.onCreate(savedInstanceState);
@@ -51,7 +46,6 @@ public class SellerDashboard extends AppCompatActivity {
         setupDrawerNavigation();
         loadSellerProfile();
         
-        // Load home fragment by default
         if (savedInstanceState == null) {
             loadFragment(new SellerHomeFragment(), "Home");
         }
@@ -139,5 +133,8 @@ public class SellerDashboard extends AppCompatActivity {
         finish();
     }
 }
+
+
+
 
 
