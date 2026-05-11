@@ -1,119 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
+    <!-- Main Content -->
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:background="@color/white">
 
-        <!-- Header -->
-        <TextView
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Seller Dashboard"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginBottom="24dp"
-            />
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            app:navigationIcon="@drawable/ic_menu"
+            app:titleTextColor="@color/white" />
 
-        <!-- Seller Name -->
-        <TextView
-            android:id="@+id/tv_seller_name"
+        <!-- Fragment Container -->
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Welcome, Seller"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="16dp"
-            />
-
-        <!-- Seller Email -->
-        <TextView
-            android:id="@+id/tv_seller_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="seller@example.com"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="8dp"
-            />
-
-        <!-- Account Type -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Account Type: Seller"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="8dp"
-            />
-
-        <!-- Divider -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            />
-
-        <!-- Add Product Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_add_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Product"
-            android:textSize="16sp"
-            app:backgroundTint="@color/black"
-            android:textColor="@color/white"
-            app:cornerRadius="12dp"
-            android:layout_marginTop="16dp"
-            />
-
-        <!-- View Products Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_view_products"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View My Products"
-            android:textSize="16sp"
-            app:backgroundTint="@color/black"
-            android:textColor="@color/white"
-            app:cornerRadius="12dp"
-            android:layout_marginTop="16dp"
-            />
-
-        <!-- Spacer -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-
-        <!-- Logout Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_seller_logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:textSize="16sp"
-            app:backgroundTint="@android:color/holo_red_dark"
-            android:textColor="@color/white"
-            app:cornerRadius="12dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp"
-            />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
-</FrameLayout>
+    <!-- Navigation Drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        app:menu="@menu/seller_drawer_menu"
+        app:headerLayout="@layout/drawer_header" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
 
 
