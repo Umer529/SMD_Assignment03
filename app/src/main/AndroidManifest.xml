@@ -23,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mid1">
         <activity
+            android:name=".SellerDashboard"
+            android:exported="false" />
+        <activity
             android:name=".item_search_history"
             android:exported="false" />
         <activity

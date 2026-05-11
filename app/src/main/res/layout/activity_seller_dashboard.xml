@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seller Dashboard"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="24dp"
+            />
+
+        <!-- Seller Name -->
+        <TextView
+            android:id="@+id/tv_seller_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome, Seller"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp"
+            />
+
+        <!-- Seller Email -->
+        <TextView
+            android:id="@+id/tv_seller_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="seller@example.com"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            />
+
+        <!-- Account Type -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Account Type: Seller"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            />
+
+        <!-- Add Product Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Product"
+            android:textSize="16sp"
+            app:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            app:cornerRadius="12dp"
+            android:layout_marginTop="16dp"
+            />
+
+        <!-- View Products Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_view_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View My Products"
+            android:textSize="16sp"
+            app:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            app:cornerRadius="12dp"
+            android:layout_marginTop="16dp"
+            />
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <!-- Logout Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_seller_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textSize="16sp"
+            app:backgroundTint="@android:color/holo_red_dark"
+            android:textColor="@color/white"
+            app:cornerRadius="12dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>
+
+

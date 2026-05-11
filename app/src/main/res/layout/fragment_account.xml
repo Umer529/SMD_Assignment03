@@ -132,20 +132,45 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="Country"
             android:textSize="12sp"
             android:textColor="@color/text_secondary"
             android:layout_marginBottom="2dp" />
         <TextView
-            android:id="@+id/tv_account_password"
+            android:id="@+id/tv_account_country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/password"
+            android:text="Country not available"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:padding="12dp"
+            android:background="@color/card_bg"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Account Type"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="2dp" />
+        <TextView
+            android:id="@+id/tv_account_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buyer"
             android:textSize="16sp"
             android:textColor="@color/text_primary"
             android:padding="12dp"
             android:background="@color/card_bg"
             android:layout_marginBottom="24dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_account_logout"

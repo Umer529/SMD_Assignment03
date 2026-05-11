@@ -41,4 +41,20 @@
 
     <!-- Logout -->
     <string name="logout">Logout</string>
+
+    <!-- Gender Options -->
+    <string-array name="gender_options">
+        <item>Select Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <!-- Account Type Options -->
+    <string-array name="account_type_options">
+        <item>Select Account Type</item>
+        <item>Buyer</item>
+        <item>Seller</item>
+    </string-array>
+
 </resources>

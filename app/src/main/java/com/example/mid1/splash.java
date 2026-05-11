@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,15 +22,13 @@ public class splash extends AppCompatActivity {
     SharedPreferences sPref;
     SharedPreferences.Editor editor;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
         logo = findViewById(R.id.splash_logo);
-        sPref = getSharedPreferences("user",MODE_PRIVATE);
+        sPref = getSharedPreferences("user", MODE_PRIVATE);
 
         // Load animations
         Animation fadeScale = AnimationUtils.loadAnimation(this, R.anim.splash);
@@ -45,15 +42,19 @@ public class splash extends AppCompatActivity {
 
             boolean isFirstTime = sPref.getBoolean("app.isFirstTime", true);
             boolean isLogin = sPref.getBoolean("user.isLogin", false);
+            String accountType = sPref.getString("user.accountType", "");
 
             if (isFirstTime) {
                 startActivity(new Intent(splash.this, OnBoarding.class));
-            }
-            else if (!isLogin) {
+            } else if (!isLogin) {
                 startActivity(new Intent(splash.this, activity_credentials.class));
-            }
-            else {
-                startActivity(new Intent(splash.this, MainActivity2.class));
+            } else {
+                // Auto-login: redirect based on account type
+                if ("Seller".equalsIgnoreCase(accountType)) {
+                    startActivity(new Intent(splash.this, SellerDashboard.class));
+                } else {
+                    startActivity(new Intent(splash.this, MainActivity2.class));
+                }
             }
 
             finish();
